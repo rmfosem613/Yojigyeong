@@ -1,0 +1,39 @@
+* {margin: 0; padding: 0;}
+body {
+    background-color: #FAFAFA; 
+    min-width: 1500px;
+}
+#wrap {
+    width: 1200px; 
+    margin: 0 auto;
+}
+#content_box {
+    overflow: auto; 
+    padding: 1%; 
+    width: 100%; 
+    height: 800px; 
+    background-color: #FAFAFA;
+}
+#content_box .content1 {
+    width: 90%; 
+    height: 380px; 
+    min-width: 800px; 
+    border-radius: 5px; 
+    background-color: #ffffff; 
+    border: 1px solid #707070;
+}
+#content_box .content2 {
+    width: 90%; 
+    height: 380px; 
+    min-width: 800px; 
+    margin-top: 10px; 
+    border-radius: 5px; 
+    background-color: #ffffff; 
+    border: 1px solid #707070;
+}
+
+/* 화면 너비 0 ~ 1200px */
+@media (max-width: 1240px){
+    #wrap {width: 100%;}
+    #content_box {width: 100%;}
+}
