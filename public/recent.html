@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>나라별 최신 정보 페이지</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.6.2/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.6.2/firebase-database.js"></script>
+</head>
+<body>
+    <h4>나라별 최신 정보 페이지</h4>
+    <div id="wrap">
+        <div id="content_box" align="center">
+            <div class="content1">
+                <button type="button" id="button">Button</button>
+                <script>
+                    const requestURL = 'http://apis.data.go.kr/1262000/SafetyNewsList';
+                    const queryParams = '?' + encodeURIComponent('ServiceKey') + '='+'%2FNLODg7mkCAvVhCnuiKEBZPxLH7OHOVfeczIPRqTcLa4TGtwZZXSu0gDU6yo5hy3tfnzvgPtrlbTSwKWBvWy5Q%3D%3D' + '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10') + '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
+
+
+                    const button = document.getElementById('button');
+                    button.addEventListener('click', getData);
+
+                    function getData() {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET', requestURL + queryParams);
+                    xhr.onload = () => {
+                        console.log(xhr.response);
+                    };
+                    xhr.send();
+                    }
+                </script>
+            </div>
+            <div class="content2"></div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
