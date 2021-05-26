@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>나라별 최신 정보 페이지</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+    <!-- Semantic -->
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css"> <!--배경 색을 지정함-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="semantic/semantic.min.js"></script>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.6.2/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.6.2/firebase-database.js"></script>
+</head>
+
+<body style="background-color: #FAFAFA;">
+    <div id="wrap">
+        <div id="content_box" align="center">
+            <div class="content1">
+                <table class="ui celled table" id="jsonTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">ID</font>
+                                </font>
+                            </th>
+                            <th>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">국가이름</font>
+                                </font>
+                            </th>
+                            <th>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">제목</font>
+                                </font>
+                            </th>
+                            <th>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">작성일</font>
+                                </font>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <script>
+
+                    // DataTables 라이브러리를 사용해 table 구성
+                    $(document).ready(function () {
+
+                        $.getJSON('recentNews.json', function (json) {
+                            $('#jsonTable').append("<tbody>");
+                            for (var counter = 0; counter < json.length; counter++) {
+                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].countryName + "</td><td>" + json[counter].title + "</td><td>" + json[counter].wrtDt + "</td></tr>");
+                            }
+                            $('#jsonTable').append("</tbody>");
+                            $('#jsonTable').DataTable();
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+
+</body>
+
+</html>
