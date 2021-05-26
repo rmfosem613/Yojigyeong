@@ -58,7 +58,7 @@
                     // DataTables 라이브러리를 사용해 table 구성
                     $(document).ready(function () {
 
-                        $.getJSON('recentNews.json', function (json) {
+                        $.getJSON('./Json/recentNews.json', function (json) {
                             $('#jsonTable').append("<tbody>");
                             for (var counter = 0; counter < json.length; counter++) {
                                 $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].countryName + "</td><td>" + json[counter].title + "</td><td>" + json[counter].wrtDt + "</td></tr>");
