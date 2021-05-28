@@ -25,6 +25,7 @@ body {
     border: 1px solid #707070;
 }
 #content_box .content2 {
+    overflow: scroll; 
     width: 90%; 
     height: 380px; 
     min-width: 800px; 
