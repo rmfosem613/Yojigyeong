@@ -2,9 +2,53 @@
 body {
     min-width: 1500px;
 }
+
+/* 사이드 메뉴 구성 */
+ul {
+    list-style-type: none;
+    background-color: #fff;
+    outline-color: #aaa;
+    outline-style: auto;
+    width: 20%;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+li {
+    margin-left: 15px;
+}
+li a {
+    text-decoration: none;
+    display: block;
+    color: #555;
+    padding: 8px 15px 8px 15px;
+    font-weight: bold;
+    font-size: large;
+}
+.home_btn{
+    margin-top: 20px;
+    margin-left: 10px;
+    font-size: xx-large;
+}
+.vaccine_btn {
+    margin-top: 20px;
+}
+.flight_btn {
+    margin-top: 20px;
+}
+.recent_btn {
+    margin-top: 20px;
+}
+li a:hover {
+    color: #F17F42;
+}
+
+/* container 구성 */
 #wrap {
     width: 1100px; 
-    margin: 0 auto;
+    margin-left: 20%;
     background-color: #FAFAFA;
 }
 #content_box {
@@ -15,6 +59,7 @@ body {
     background-color: #FAFAFA;
 }
 #content_box .content1 {
+    overflow: scroll; 
     width: 90%; 
     height: 580px; 
     min-width: 800px; 
@@ -24,6 +69,7 @@ body {
     border: 1px solid #707070;
 }
 #content_box .content2 {
+    overflow: scroll; 
     width: 90%; 
     height: 380px; 
     min-width: 800px; 
@@ -33,8 +79,9 @@ body {
     border: 1px solid #707070;
 }
 
-/* 화면 너비 0 ~ 1200px */
-@media (max-width: 1240px){
+/* 화면 너비 0 ~ 1090px 
+@media (max-width: 1090px){
     #wrap {width: 100%;}
     #content_box {width: 100%;}
-}
+    #content_box .content1{height: 580px;}
+}*/
