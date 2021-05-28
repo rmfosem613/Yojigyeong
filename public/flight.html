@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <title>나라별 최신 정보 페이지</title>
     <link rel="stylesheet" type="text/css" href="./style.css">
-    <link type="text/javascript" href="./menu.js">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <!--CORS 무시-->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
 
     <!-- Semantic -->
-    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
-    <!--배경 색을 지정함-->
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css"> <!--배경 색을 지정함-->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="semantic/semantic.min.js"></script>
@@ -26,29 +25,6 @@
 </head>
 
 <body style="background-color: #FAFAFA;">
-    <!-- 사이드 메뉴 -->
-    <ul>
-        <li><a class="home_btn" href="./index.html"><img src="./image/earth-globe.png"
-                    style="margin-right: 13px; height: 35px;">요<span style="color: #F17F42;">지</span>경</a></li>
-        <hr style="margin-top: 15px; margin-left: 20px; margin-right: 30px;">
-
-        <!-- 검색 -->
-        <div class="ui search" style="margin-top: 20px; margin-left: 20px;">
-            <div class="ui icon input">
-                <input class="prompt" type="text" placeholder="나라 검색">
-                <i class="search icon"></i>
-            </div>
-            <div class="results"></div>
-        </div>
-
-        <li><a class="vaccine_btn" href="#"><img src="./image/syringe.png" style="margin-right: 12px; height: 25px;">백신
-                정보</a></li>
-        <li><a class="flight_btn" href="#"><img src="./image/airplane.png" style="margin-right: 10px; height: 28px;">운항
-                정보</a></li>
-        <li><a class="recent_btn" href="#"><img src="./image/earth.png" style="margin-right: 15px; height: 22px;">나라별 최신
-                정보</a></li>
-    </ul>
-
     <div id="wrap">
         <div id="content_box" align="center">
             <div class="content1">
@@ -80,13 +56,14 @@
                 </table>
 
                 <script>
+
                     // DataTables 라이브러리를 사용해 table 구성
                     $(document).ready(function () {
 
-                        $.getJSON('./Json/recentNews.json', function (json) {
+                        $.getJSON('./Json/flight.json', function (json) {
                             $('#jsonTable').append("<tbody>");
                             for (var counter = 0; counter < json.length; counter++) {
-                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].countryName + "</td><td>" + json[counter].title + "</td><td>" + json[counter].wrtDt + "</td></tr>");
+                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].country_nm + "</td><td>" + json[counter].title + "</td><td>" + json[counter].wrt_dt + "</td></tr>");
                             }
                             $('#jsonTable').append("</tbody>");
                             $('#jsonTable').DataTable();
