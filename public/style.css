@@ -15,6 +15,7 @@ body {
     background-color: #FAFAFA;
 }
 #content_box .content1 {
+    overflow: scroll; 
     width: 90%; 
     height: 580px; 
     min-width: 800px; 
