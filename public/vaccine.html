@@ -61,20 +61,20 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--                <iframe src="https://ourworldindata.org/explorers/coronavirus-data-explorer?zoomToSelection=true&time=2020-03-01..latest&pickerSort=desc&pickerMetric=total_vaccinations_per_hundred&Metric=Vaccine+doses&Interval=Cumulative&Relative+to+Population=true&Align+outbreaks=false&country=USA~GBR~ISR~DEU~ARE~ARG~FRA"-->
                     <iframe src="https://ourworldindata.org/explorers/coronavirus-data-explorer?tab=map&zoomToSelection=true&pickerSort=desc&pickerMetric=total_vaccinations_per_hundred&Metric=Vaccine+doses&Interval=Cumulative&Relative+to+Population=true&Align+outbreaks=false&country=USA~GBR~ISR~DEU~ARE~ARG~FRA"
-                        width="100%" height="100%" scrolling="no" frameborder="1"></iframe>
+                        width="100%" height="100%" scrolling="yes" frameborder="1"></iframe>
             </div>
-            <div class="content2" id="vaccine_table">
+            <div class="content2">
                 <table class="ui celled table" id="jsonTable">
                     <thead>
                         <tr>
                             <th>
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">국가이름</font>
+                                    <font style="vertical-align: inherit;">업데이트 날짜</font>
                                 </font>
                             </th>
                             <th>
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">업데이트 날짜</font>
+                                    <font style="vertical-align: inherit;">국가 이름</font>
                                 </font>
                             </th>
                             <th>
@@ -84,7 +84,7 @@
                             </th>
                             <th>
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">전체 접종량(%)</font>
+                                    <font style="vertical-align: inherit;">전체 접종률 (%)</font>
                                 </font>
                             </th>
                         </tr>
@@ -136,8 +136,8 @@
                                                 country.child(data_num + '/people_vaccinated_per_hundred').on('value', snap => {  //총 접종%
                                                     var per = snap.val();
                                                     var temp = "<tr>";
-                                                    temp += "<td>" + countryName + "</td>";
                                                     temp += "<td>"+ updateDate + "</td>";
+                                                    temp += "<td>" + countryName + "</td>";
                                                     temp += "<td>" + snap.val() + "</td>";
                                                     temp += "<td>" + per + "</td></tr>";
                                                     $('#jsonTable').append(temp);
@@ -153,7 +153,11 @@
                             }
 
                             $('#jsonTable').append("</tbody>");
-                            $('#jsonTable').DataTable();
+                            $('#jsonTable').DataTable({
+                                order: [[0, 'desc']],
+                                serVerSide: false,
+                                ordering: true
+                            })
                         })
                     })
                 </script>
