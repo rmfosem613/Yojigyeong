@@ -63,6 +63,32 @@
                                     width="100%" height="100%" scrolling="no" frameborder="1"></iframe>
             </div>
             <div class="content2" id="vaccine_table">
+                <table class="ui celled table" id="jsonTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">국가이름</font>
+                                </font>
+                            </th>
+                            <th>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">업데이트 날짜</font>
+                                </font>
+                            </th>
+                            <th>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">일일 접종량</font>
+                                </font>
+                            </th>
+                            <th>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">전체 접종량(%)</font>
+                                </font>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
                 <script>
                     // Your web app's Firebase configuration
                     var firebaseConfig = {
@@ -76,71 +102,59 @@
                     };
                     // Initialize Firebase
                     firebase.initializeApp(firebaseConfig);
-
-                    const database = firebase.database();
-                    const data_ = database.ref();
-                    data_.on('value', snap => {
-                        var count = Object.keys(snap.val()).length; //전체 나라 수
-
-                        console.log("길이: ", count);
-                        console.log("data_: ",snap.val());
-
-                        for (var i=0;i<=count-1;i++){
-                            var country_count = String(i);
-                            var country = database.ref(country_count+'/data/');
-                            country.on('value', snap =>{
-                                var data_count = Object.keys(snap.val()).length;    //개별 나라에 들어있는 데이터 수
-                                console.log("data_count: ", data_count);
-                                console.log("country_data", snap.val());
-                            })
-                            var data_num = String(data_count-1);
-                            country.child(data_num).on('value', snap =>{
-                                console.log("data_latest", snap.val()); //가장 최신 데이터
-                            })
-                        }
-                    })
-                </script>
-                <table class="ui celled table" id="jsonTable">
-                    <thead>
-                    <tr>
-                        <th>
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">국가이름</font>
-                            </font>
-                        </th>
-                        <th>
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">업데이트 날짜</font>
-                            </font>
-                        </th>
-                        <th>
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">일일 접종량</font>
-                            </font>
-                        </th>
-                        <th>
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">전체 접종량(%)</font>
-                            </font>
-                        </th>
-                    </tr>
-                    </thead>
-                </table>
-
-                <script>
-                    // DataTables 라이브러리를 사용해 table 구성
                     $(document).ready(function () {
+                        $('#jsonTable').append("<tbody>");
 
-                        $.getJSON('./Json/recentNews.json', function (json) {
-                            $('#jsonTable').append("<tbody>");
-                            for (var counter = 0; counter < json.length; counter++) {
-                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].countryName + "</td><td>" + json[counter].title + "</td><td>" + json[counter].wrtDt + "</td></tr>");
+                        const database = firebase.database();
+                        const data_ = database.ref();
+                        // database.ref().on("value", function(snapshot){
+                        //     snapshot.forEach(function(element){
+                        //         console.log(element.key);
+                        //         // document.querySelector('#root').innerHTML+=`
+                        //         //     <div>${element.val()}</div>`
+                        //     })
+                        // })
+
+                        data_.on('value', snap => {
+                            var count = Object.keys(snap.val()).length; //전체 나라 수
+
+                            console.log("길이: ", count);
+                            console.log("data_: ", snap.val());
+                            for (var i = 0; i <= count; i++) {
+                                $('#jsonTable').append("<tr>");
+                                var country_count = String(i);
+                                database.ref(country_count).child('country').on('value', snap => {       //나라 이름
+                                    console.log("country name: ", snap.val());
+                                    $('#jsonTable').append("<td>" + snap.val() + "</td><td>");
+                                })
+                                const country = database.ref(country_count + '/data/');
+                                country.on('value', snap => {
+                                    var data_count = Object.keys(snap.val()).length;    //개별 나라에 들어있는 데이터 수
+                                    console.log("data_count: ", data_count);
+                                    // console.log("country_data", snap.val());
+
+                                    var data_num = String(data_count - 1);
+                                    country.child(data_num + '/date').on('value', snap => {    //가장 최신 업데이트 날짜
+                                        console.log("data_latest", snap.val());
+                                        $('#jsonTable').append( snap.val() + "</td>");
+
+                                    })
+                                    country.child(data_num + '/daily_vaccinations').on('value', snap => {   //일일 접종량
+                                        $('#jsonTable').append("<td>" + snap.val() + "</td>");
+                                    })
+                                    country.child(data_num + '/people_vaccinations_per_hundred').on('value', snap => {  //총 접종%
+                                        $('#jsonTable').append("<td>" + snap.val() + "</td>");
+                                    })
+                                })
+                                $('#jsonTable').append("</tr>");
+
                             }
-                            $('#jsonTable').append("</tbody>");
-                            $('#jsonTable').DataTable();
-                        });
+                        })
+                        $('#jsonTable').append("</tbody>");
+                        $('#jsonTable').DataTable();
                     });
                 </script>
+
             </div>
         </div>
     </div>
