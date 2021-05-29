@@ -63,9 +63,9 @@
 
             $.getJSON('./Json/recentNews.json', function (json) {
                             $('#jsonTable').append("<tbody>");
-                            for (var counter = 0; counter < json.length; counter++) {
-                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].countryName + `</td><td><a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrtDt + "</td></tr>");
-                            }
+                            
+                            $('#jsonTable').append("<tr><td>" + json[val-1].countryName + `</td><td><a onclick="setChildValue(` + `${json[val-1].id})` + `">` + json[val-1].title + "</a></td><td>" + json[val-1].wrtDt + "</td><td>" + json[val-1].contentHtml + "</td></tr>");
+                            
                             $('#jsonTable').append("</tbody>");
                             $('#jsonTable').DataTable();
                         });
