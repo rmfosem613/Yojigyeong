@@ -43,7 +43,7 @@
 
         <li><a class="vaccine_btn" href="#"><img src="./image/syringe.png" style="margin-right: 12px; height: 25px;">백신
                 정보</a></li>
-        <li><a class="flight_btn" href="./flight.html"><img src="./image/airplane.png"
+        <li><a class="flight_btn" href="#"><img src="./image/airplane.png"
                     style="margin-right: 10px; height: 28px;">운항 정보</a></li>
         <li><a class="recent_btn" href="./recent.html"><img src="./image/earth.png"
                     style="margin-right: 15px; height: 22px;">나라별 최신 정보</a></li>
@@ -87,7 +87,7 @@
                         $.getJSON('./Json/flight.json', function (json) {
                             $('#jsonTable').append("<tbody>");
                             for (var counter = 0; counter < json.length; counter++) {
-                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].country_nm + "</td><td>" + json[counter].title + "</td><td>" + json[counter].wrt_dt + "</td></tr>");
+                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].country_nm + `</td><td><a href="#">` + json[counter].title + "</a></td><td>" + json[counter].wrt_dt + "</td></tr>");
                             }
                             $('#jsonTable').append("</tbody>");
                             $('#jsonTable').DataTable();
