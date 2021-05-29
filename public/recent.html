@@ -35,7 +35,7 @@
         <div class="ui search" style="margin-top: 20px; margin-left: 20px;">
             <div class="ui icon input">
                 <input class="prompt" type="text" placeholder="나라 검색">
-                <i class="search icon"></i>
+                <i class="search icon" onclick="setSearchValue(``)"></i>
             </div>
             <div class="results"></div>
         </div>
@@ -95,6 +95,9 @@
 
                     function setChildValue(index) {
                         window.location.href = "recentview.html?index=" + index;
+                    }
+                    function setSearchValue(index) {
+                        window.location.href = "countryview.html?index=" + index;
                     }
                 </script>
             </div>
