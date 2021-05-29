@@ -26,7 +26,7 @@
 
 </head>
 
-<body>
+<body style="background-color:#FAFAFA">
   <!-- 사이드 메뉴 -->
   <ul>
     <li><a class="home_btn" href="./index.html"><img src="./image/earth-globe.png"
@@ -47,6 +47,7 @@
     <li><a class="recent_btn" href="./recent.html"><img src="./image/earth.png" style="margin-right: 15px; height: 22px;">나라별 최신 정보</a></li>
   </ul>
 
+  <!-- 모달 -->
   <div id="wrap">
     <div class="ui modal">
       <i class="close icon"></i>
@@ -63,8 +64,9 @@
         </div>
       </div>
     </div>
-
-    <div id="container" style="position: relative; width: 500px; height: 300px;"></div>
+    
+    <!-- 데이터 맵 -->
+    <div id="container" style="position: relative; width: 1000px; height: 700px; margin-left: 10%;"></div>
     <script>
       var map = new Datamap({
         element: document.getElementById('container'),
