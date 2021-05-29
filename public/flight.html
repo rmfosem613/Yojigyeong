@@ -87,12 +87,16 @@
                         $.getJSON('./Json/flight.json', function (json) {
                             $('#jsonTable').append("<tbody>");
                             for (var counter = 0; counter < json.length; counter++) {
-                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].country_nm + `</td><td><a href="#">` + json[counter].title + "</a></td><td>" + json[counter].wrt_dt + "</td></tr>");
+                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].country_nm + `</td><td><a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrt_dt + "</td></tr>");
                             }
                             $('#jsonTable').append("</tbody>");
                             $('#jsonTable').DataTable();
                         });
                     });
+
+                    function setChildValue(index) {
+                        window.location.href = "flightview.html?index=" + index;
+                    }
                 </script>
             </div>
         </div>
