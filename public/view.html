@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>나라별 최신 정보 페이지</title>
+    <title>게시글 자세히 보는 페이지</title>
     <link rel="stylesheet" type="text/css" href="./style.css">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
@@ -22,9 +22,12 @@
     <script defer src="/__/firebase/8.6.2/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/8.6.2/firebase-database.js"></script>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
 </head>
 
-<body style="background-color: #FAFAFA;">
+<body style="background-color:#FAFAFA">
     <!-- 사이드 메뉴 -->
     <ul>
         <li><a class="home_btn" href="./index.html"><img src="./image/earth-globe.png"
@@ -43,47 +46,22 @@
         <li><a class="vaccine_btn" href="#"><img src="./image/syringe.png" style="margin-right: 12px; height: 25px;">백신
                 정보</a></li>
         <li><a class="flight_btn" href="./flight.html"><img src="./image/airplane.png"
-                    style="margin-right: 10px; height: 28px;">운항
-                정보</a></li>
-        <li><a class="recent_btn" href="#"><img src="./image/earth.png" style="margin-right: 15px; height: 22px;">나라별 최신
-                정보</a></li>
+                    style="margin-right: 10px; height: 28px;">운항 정보</a></li>
+        <li><a class="recent_btn" href="./recent.html"><img src="./image/earth.png"
+                    style="margin-right: 15px; height: 22px;">나라별 최신 정보</a></li>
     </ul>
-
     <div id="wrap">
-        <div id="content_box" align="center">
-            <div class="content1">
-                <table class="ui celled table" id="jsonTable">
-                    <thead>
-                        <tr>
-                            <th>
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">ID</font>
-                                </font>
-                            </th>
-                            <th>
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">국가이름</font>
-                                </font>
-                            </th>
-                            <th>
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">제목</font>
-                                </font>
-                            </th>
-                            <th>
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">작성일</font>
-                                </font>
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
+        
+    </div>
 
-                <script>
-                    // DataTables 라이브러리를 사용해 table 구성
-                    $(document).ready(function () {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var val = location.href.substr(
+                location.href.lastIndexOf('=') + 1
+            );
+            console.log('val : ' + val);
 
-                        $.getJSON('./Json/recentNews.json', function (json) {
+            $.getJSON('./Json/recentNews.json', function (json) {
                             $('#jsonTable').append("<tbody>");
                             for (var counter = 0; counter < json.length; counter++) {
                                 $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].countryName + `</td><td><a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrtDt + "</td></tr>");
@@ -91,14 +69,8 @@
                             $('#jsonTable').append("</tbody>");
                             $('#jsonTable').DataTable();
                         });
-                    });
-
-                    function setChildValue(index) {
-                        window.location.href = "view.html?index=" + index;
-                    }
-                </script>
-            </div>
-        </div>
+        });
+    </script>
 
 </body>
 
