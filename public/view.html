@@ -51,7 +51,7 @@
                     style="margin-right: 15px; height: 22px;">나라별 최신 정보</a></li>
     </ul>
     <div id="wrap">
-        
+
     </div>
 
     <script type="text/javascript">
@@ -62,13 +62,13 @@
             console.log('val : ' + val);
 
             $.getJSON('./Json/recentNews.json', function (json) {
-                            $('#jsonTable').append("<tbody>");
-                            
-                            $('#jsonTable').append("<tr><td>" + json[val-1].countryName + `</td><td><a onclick="setChildValue(` + `${json[val-1].id})` + `">` + json[val-1].title + "</a></td><td>" + json[val-1].wrtDt + "</td><td>" + json[val-1].contentHtml + "</td></tr>");
-                            
-                            $('#jsonTable').append("</tbody>");
-                            $('#jsonTable').DataTable();
-                        });
+                $('#jsonTable').append("<tbody>");
+
+                $('#jsonTable').append("<tr><td>" + json[val - 1].countryName + `</td><td><a onclick="setChildValue(` + `${json[val - 1].id})` + `">` + json[val - 1].title + "</a></td><td>" + json[val - 1].wrtDt + "</td><td>" + json[val - 1].contentHtml + "</td></tr>");
+
+                $('#jsonTable').append("</tbody>");
+                $('#jsonTable').DataTable();
+            });
         });
     </script>
 
