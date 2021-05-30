@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>나라별 최신 정보 페이지</title>
     <link rel="stylesheet" type="text/css" href="./style.css">
-    <link type="text/javascript" href="./menu.js">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <!-- Semantic -->
@@ -23,34 +22,68 @@
     <script defer src="/__/firebase/8.6.2/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/8.6.2/firebase-database.js"></script>
+
+    <script>
+        var check_country = new Array;
+        function checkCountry(countryName) {
+            var isTrue;
+            for (var i = 0; i < check_country.length; i++) {
+                if (countryName == check_country[i]) {
+                    isTrue = false;
+                    return Boolean(isTrue);
+                }
+            }
+            isTrue = true;
+            return Boolean(isTrue);
+        }
+
+        $(document).ready(function () {
+            $.getJSON('./Json/recentNews.json', function (json) {
+
+                for (var counter = 0; counter < json.length; counter++) {
+                    if (checkCountry(json[counter].countryName)) {
+                        $('#search-select').append('<option value=' + json[counter].countryEnName + '>' + json[counter].countryName + '</option>');
+                        check_country.push(json[counter].countryName);
+                    }
+                }
+                console.log(check_country);
+            });
+
+            $('#search-select')
+                .dropdown()
+                ;
+        });
+    </script>
 </head>
 
 <body style="background-color: #FAFAFA;">
     <!-- 사이드 메뉴 -->
-    <ul>
-        <li><a class="home_btn" href="./index.html"><img src="./image/earth-globe.png"
-                    style="margin-right: 13px; height: 35px;">요<span style="color: #F17F42;">지</span>경</a></li>
-        <hr style="margin-top: 15px; margin-left: 20px; margin-right: 30px;">
+    <div id="side_menu">
 
-        <!-- 검색 -->
-        <div class="ui search" style="margin-top: 20px; margin-left: 20px;">
-            <div class="ui icon input">
-                <input class="prompt" type="text" placeholder="나라 검색">
-                <i class="search icon"></i>
-            </div>
-            <div class="results"></div>
-        </div>
+        <ul>
+            <li><a class="home_btn" href="./index.html"><img src="./image/earth-globe.png"
+                        style="margin-right: 13px; height: 35px;">요<span style="color: #F17F42;">지</span>경</a></li>
+            <hr style="margin-top: 15px; margin-left: 20px; margin-right: 30px;">
 
-        <li><a class="vaccine_btn" href="#"><img src="./image/syringe.png" style="margin-right: 12px; height: 25px;">백신
-                정보</a></li>
-        <li><a class="flight_btn" href="#"><img src="./image/airplane.png" style="margin-right: 10px; height: 28px;">운항
-                정보</a></li>
-        <li><a class="recent_btn" href="#"><img src="./image/earth.png" style="margin-right: 15px; height: 22px;">나라별 최신
-                정보</a></li>
-    </ul>
+            <!-- 드랍 다운 -->
+            <select class="ui search selection dropdown" id="search-select"
+                style="margin-top: 20px; margin-left: 20px;">
+                <option value="">나라 이름</option>
+            </select>
 
+            <li><a class="vaccine_btn" href="./vaccine.html"><img src="./image/syringe.png"
+                        style="margin-right: 12px; height: 25px;">백신
+                    정보</a></li>
+            <li><a class="flight_btn" href="./flight.html"><img src="./image/airplane.png"
+                        style="margin-right: 10px; height: 28px;">운항
+                    정보</a></li>
+            <li><a class="recent_btn" href="#"><img src="./image/earth.png"
+                        style="margin-right: 15px; height: 22px;">나라별 최신
+                    정보</a></li>
+        </ul>
+    </div>
     <div id="wrap">
-        <div id="content_box" align="center">
+        <div id="content_box">
             <div class="content1">
                 <table class="ui celled table" id="jsonTable">
                     <thead>
@@ -86,12 +119,19 @@
                         $.getJSON('./Json/recentNews.json', function (json) {
                             $('#jsonTable').append("<tbody>");
                             for (var counter = 0; counter < json.length; counter++) {
-                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].countryName + "</td><td>" + json[counter].title + "</td><td>" + json[counter].wrtDt + "</td></tr>");
+                                $('#jsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].countryName + `</td><td><a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrtDt + "</td></tr>");
                             }
                             $('#jsonTable').append("</tbody>");
                             $('#jsonTable').DataTable();
                         });
                     });
+
+                    function setChildValue(index) {
+                        window.location.href = "recentview.html?index=" + index;
+                    }
+                    function setSearchValue(index) {
+                        window.location.href = "countryview.html?index=" + index;
+                    }
                 </script>
             </div>
         </div>
