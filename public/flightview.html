@@ -42,7 +42,7 @@
 
                 for (var counter = 0; counter < json.length; counter++) {
                     if (checkCountry(json[counter].countryName)) {
-                        $('#search-select').append(`<option value=` + json[counter].countryName + '>' + json[counter].countryName + '</option>');
+                        $('#search-select').append(`<option value=` + json[counter].countryEnName + '>' + json[counter].countryName + '</option>');
                         check_country.push(json[counter].countryName);
                     }
                 }
