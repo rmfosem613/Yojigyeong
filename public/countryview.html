@@ -153,12 +153,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var para = document.location.href.split("=");
-            console.log(para[1]);
 
             $.getJSON('./Json/recentNews.json', function (json) {
                 $('#rejsonTable').append("<tbody>");
                 for (var counter = 0; counter < json.length; counter++) {
-                    if (json[counter].countryEnName === para[1]) {
+                    if (json[counter].countryName === para[1]) {
                         $('#rejsonTable').append("<tr><td>" + json[counter].countryName + `</td><td><a onclick="setRecentValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrtDt + "</td></tr>");
                     }
                 }
@@ -169,7 +168,7 @@
             $.getJSON('./Json/flight.json', function (json) {
                 $('#fljsonTable').append("<tbody>");
                 for (var counter = 0; counter < json.length; counter++) {
-                    if (json[counter].country_eng_nm === para[1]) {
+                    if (json[counter].country_nm === para[1]) {
                         $('#fljsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].country_nm + `</td><td><a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrt_dt + "</td></tr>");
                     }
                 }
