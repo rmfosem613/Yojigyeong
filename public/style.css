@@ -1,9 +1,14 @@
 * {margin: 0; padding: 0;}
 body {
-    min-width: 1500px;
+    /*min-width: 1500px;*/
+
 }
 
 /* 사이드 메뉴 구성 */
+/*#side_menu{*/
+/*    float:left;*/
+/*}*/
+
 ul {
     list-style-type: none;
     background-color: #fff;
@@ -14,7 +19,7 @@ ul {
     margin: 0;
     position: fixed;
     height: 100%;
-    overflow: auto;
+    /*overflow: auto;*/
 }
 li {
     margin-left: 15px;
@@ -56,33 +61,36 @@ li a.flight_btn:hover {
 }
 /* container 구성 */
 #wrap {
-    width: 1100px; 
-    margin-left: 20%;
+    /*width: 100%;*/
+    /*float:left;*/
+    margin-left: 30%;
     background-color: #FAFAFA;
 }
 #content_box {
-    overflow: auto; 
-    padding: 1%; 
+    overflow: auto;
+    padding: 1%;
     width: 100%;
-    height: 800px; 
+    min-width: 480px;
+    height: 100%;
     background-color: #FAFAFA;
 }
 #content_box .content1 {
-    overflow: scroll; 
-    width: 90%; 
-    height: 580px; 
-    min-width: 800px; 
+    overflow: auto;
+    width: 90%;
+    /*min-height: 580px;*/
+    height: 100%;
+    min-width: 480px;
     margin-top: 50px;
     border-radius: 5px; 
     background-color: #ffffff; 
     border: 1px solid #707070;
 }
 #content_box .content2 {
-    overflow: scroll; 
+    overflow: auto;
     width: 90%; 
-    height: 380px; 
-    min-width: 800px; 
-    margin-top: 10px; 
+    height: 100%;
+    /*min-width: 800px; */
+    margin-top: 30px;
     border-radius: 5px; 
     background-color: #ffffff; 
     border: 1px solid #707070;

@@ -26,14 +26,16 @@
 
 <body style="background-color: #FAFAFA;">
     <!-- 사이드 메뉴 -->
-    <ul>
+    <div id = "side_menu">
+
+        <ul>
         <li><a class="home_btn" href="./index.html"><img src="./image/earth-globe.png"
                     style="margin-right: 13px; height: 35px;">요<span style="color: #F17F42;">지</span>경</a></li>
         <hr style="margin-top: 15px; margin-left: 20px; margin-right: 30px;">
 
         <!-- 검색 -->
         <div class="ui search" style="margin-top: 20px; margin-left: 20px;">
-            <div class="ui icon input">
+            <div class="ui icon input" style="width: 90%">
                 <input class="prompt" type="text" placeholder="나라 검색">
                 <i class="search icon" onclick="setSearchValue(``)"></i>
             </div>
@@ -48,9 +50,9 @@
         <li><a class="recent_btn" href="#"><img src="./image/earth.png" style="margin-right: 15px; height: 22px;">나라별 최신
                 정보</a></li>
     </ul>
-
+    </div>
     <div id="wrap">
-        <div id="content_box" style="margin-left: 10%;">
+        <div id="content_box">
             <div class="content1">
                 <table class="ui celled table" id="jsonTable">
                     <thead>
