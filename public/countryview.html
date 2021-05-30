@@ -14,6 +14,10 @@
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="semantic/semantic.min.js"></script>
 
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/8.6.2/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -81,7 +85,59 @@
     </div>
 
     <div id="wrap">
-        <div class="ui segment" id="jsonSegment" style="margin-left: 10px;">
+        <div class="ui segment" id="vaccineSegment" style="margin-right: 80px;">
+
+        </div>
+        <div class="ui segment" id="recentSegment" style="margin-right: 80px;">
+            <table class="ui celled table" id="rejsonTable">
+                <thead>
+                    <tr>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">국가이름</font>
+                            </font>
+                        </th>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">제목</font>
+                            </font>
+                        </th>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">작성일</font>
+                            </font>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="ui segment" id="flightSegment" style="margin-right: 80px;">
+            <table class="ui celled table" id="fljsonTable">
+                <thead>
+                    <tr>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">ID</font>
+                            </font>
+                        </th>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">국가이름</font>
+                            </font>
+                        </th>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">제목</font>
+                            </font>
+                        </th>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">작성일</font>
+                            </font>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 
@@ -90,13 +146,36 @@
             var para = document.location.href.split("=");
             console.log(para[1]);
 
-            // $.getJSON('./Json/flight.json', function (json) {
-            //     //"<p><b>" + json[val].countryName + "</b></p>" + 
-            //     $('#jsonSegment').append('<p><br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b style = "font-size:30px; color:#F17F42">'
-            //         + json[val - 1].title + "</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "
-            //         + json[val - 1].wrt_dt + "</p><hr><br><br><p>" + json[val - 1].html_origin_cn + "</p>");
-            // });
+            $.getJSON('./Json/recentNews.json', function (json) {
+                $('#rejsonTable').append("<tbody>");
+                for (var counter = 0; counter < json.length; counter++) {
+                    if (json[counter].countryEnName === para[1]) {
+                        $('#rejsonTable').append("<tr><td>" + json[counter].countryName + `</td><td><a onclick="setRecentValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrtDt + "</td></tr>");
+                    }
+                }
+                $('#rejsonTable').append("</tbody>");
+                $('#rejsonTable').DataTable();
+            });
+
+            $.getJSON('./Json/flight.json', function (json) {
+                $('#fljsonTable').append("<tbody>");
+                for (var counter = 0; counter < json.length; counter++) {
+                    if (json[counter].country_eng_nm === para[1]) {
+                        $('#fljsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].country_nm + `</td><td><a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrt_dt + "</td></tr>");
+                    }
+                }
+                $('#fljsonTable').append("</tbody>");
+                $('#fljsonTable').DataTable();
+            });
         });
+
+        function setRecentValue(index) {
+            window.location.href = "flightview.html?index=" + index;
+        }
+
+        function setFlightValue(index) {
+            window.location.href = "flightview.html?index=" + index;
+        }
     </script>
 
 </body>
