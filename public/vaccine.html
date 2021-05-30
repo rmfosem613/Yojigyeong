@@ -135,14 +135,14 @@
                                             // console.log("data_latest", snap.val());
                                             var updateDate = snap.val();
                                             country.child(data_num + '/daily_vaccinations').on('value', snap => {   //일일
-
+                                                var per = snap.val();
                                                 country.child(data_num + '/people_vaccinated_per_hundred').on('value', snap => {  //총 접종%
-                                                    var per = snap.val();
+
                                                     var temp = "<tr>";
                                                     temp += "<td>"+ updateDate + "</td>";
                                                     temp += "<td>" + countryName + "</td>";
-                                                    temp += "<td>" + snap.val() + "</td>";
-                                                    temp += "<td>" + per + "</td></tr>";
+                                                    temp += "<td>" + per + "</td>";
+                                                    temp += "<td>" + snap.val() + "</td></tr>";
                                                     $('#jsonTable').append(temp);
                                                 })
                                             })
