@@ -65,8 +65,7 @@
             <hr style="margin-top: 15px; margin-left: 20px; margin-right: 30px;">
 
             <!-- 드랍 다운 -->
-            <select class="ui search selection dropdown" id="search-select"
-                style="margin-top: 20px; margin-left: 20px;">
+            <select class="ui search selection dropdown" id="search-select" onchange="setDropValue()">
                 <option value="">나라 이름</option>
             </select>
 
@@ -81,7 +80,7 @@
     </div>
 
     <div id="wrap">
-        <div class="ui segment" id="jsonSegment" style="margin-left: 115px;">
+        <div class="ui segment" id="jsonSegment" style="margin-right: 80px;">
         </div>
     </div>
 
@@ -97,6 +96,10 @@
                     + json[val - 1].wrt_dt + "</p><hr><br><br><p>" + json[val - 1].html_origin_cn + "</p>");
             });
         });
+        function setDropValue() {
+            var x = document.getElementById("search-select").value;
+            window.location.href = "countryview.html?country=" + x;
+        }
     </script>
 
 </body>
