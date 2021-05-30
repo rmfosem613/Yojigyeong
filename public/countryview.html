@@ -14,10 +14,6 @@
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="semantic/semantic.min.js"></script>
 
-    <!-- DataTables -->
-    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
-    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/8.6.2/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -70,7 +66,7 @@
 
             <!-- 드랍 다운 -->
             <div style="margin-left: 30px; margin-top: 25px;">
-                <select class="ui search selection dropdown" id="search-select" onchange="setSearchValue()">
+                <select class="ui search selection dropdown" id="search-select" onchange="setDropValue()">
                     <option value="">나라 이름</option>
                 </select>
             </div>
