@@ -126,11 +126,6 @@
                     <tr>
                         <th>
                             <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">ID</font>
-                            </font>
-                        </th>
-                        <th>
-                            <font style="vertical-align: inherit;">
                                 <font style="vertical-align: inherit;">국가이름</font>
                             </font>
                         </th>
@@ -169,7 +164,7 @@
                 $('#fljsonTable').append("<tbody>");
                 for (var counter = 0; counter < json.length; counter++) {
                     if (json[counter].country_eng_nm === para[1]) {
-                        $('#fljsonTable').append("<tr><td>" + json[counter].id + "</td><td>" + json[counter].country_nm + `</td><td><a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrt_dt + "</td></tr>");
+                        $('#fljsonTable').append("<tr><td>" + json[counter].country_nm + `</td><td><a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrt_dt + "</td></tr>");
                     }
                 }
                 $('#fljsonTable').append("</tbody>");
