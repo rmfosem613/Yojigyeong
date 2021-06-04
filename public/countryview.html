@@ -45,7 +45,7 @@
 
                 for (var counter = 0; counter < json.length; counter++) {
                     if (checkCountry(json[counter].countryName)) {
-                        $('#search-select').append(`<option value=` + json[counter].countryEnName + '>' + json[counter].countryName + '</option>');
+                        $('#search-select').append(`<option value=` + `'${json[counter].countryEnName}'` + '>' + json[counter].countryName + '</option>');
                         check_country.push(json[counter].countryName);
                     }
                 }
@@ -208,15 +208,13 @@
                 window.location.href = "flightview.html?index=" + index;
             }
 
-            function setFlightValue(index) {
-                window.location.href = "flightview.html?index=" + index;
-            }
-
-            function setDropValue() {
-                var x = document.getElementById("search-select").value;
-                window.location.href = "countryview.html?country=" + x;
-
-            }
+        function setFlightValue(index) {
+            window.location.href = "flightview.html?index=" + index;
+        }
+        function setDropValue() {
+            var x = document.getElementById("search-select").value;
+            window.location.href = "countryview.html?country=" + x;
+        }
 
     </script>
     <script>
