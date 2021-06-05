@@ -96,7 +96,7 @@
     <div id="wrap">
         <div id="content_box">
             <div class="content1" style="height: 640px;">
-                <div style="align-items: center; height: 50px;display: flex; align-items: center; background-color: #5C80B3">
+                <div style="align-items: center; height: 50px;display: flex; background-color: #5C80B3">
                     <div id="table_name" style="text-align: center; width: 100%">
                         <h2 style="color: #FFFFFF;">전 세계 백신 접종율</h2>
                     </div>
@@ -166,7 +166,7 @@
                                 var country_count = String(i);
 
                                 database.ref(country_count).child('country').on('value', snap => {       //나라 이름
-                                    console.log("country name: ", snap.val());
+                                    // console.log("country name: ", snap.val());
 
                                     const countryName = snap.val();
                                     const country = database.ref(country_count + '/data/');
