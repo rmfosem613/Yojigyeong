@@ -126,7 +126,7 @@
             for (var counter = 0; counter < json.length; counter++) {  //헤더, 최신 타이틀, 업데이트 날짜
               if (geography.properties.name == json[counter].countryEnName) {
                 $('#jsonModal').append('<div class="ui header" id="pre"> - ' + json[counter].countryName + '</div>');
-                $('#jsonModal').append('<p id="pre"> <b>최신 타이틀 : </b>' + json[counter].title + "</p>");
+                $('#jsonModal').append('<p id="pre"> <b>최신 타이틀 : </b>' + `<a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></p>");
                 $('#jsonModal').append('<p id="pre"> <b>업데이트 날짜 : </b>' + json[counter].wrtDt + "</p>");
                 break;
               }
@@ -146,6 +146,9 @@
         });
       }
     });
+    function setChildValue(index) {
+      window.location.href = "recentview.html?index=" + index;
+    }
 
     function setSearchValue() {
       var x = document.getElementById("search-select").value;
