@@ -89,6 +89,7 @@ li a.flight_btn:hover {
     border-radius: 5px; 
     background-color: #ffffff; 
     border: 1px solid #707070;
+    margin-bottom: 50px;
 }
 
 /* 화면 너비 0 ~ 1090px 
