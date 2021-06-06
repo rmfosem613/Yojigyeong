@@ -173,23 +173,30 @@
 
     <script type="text/javascript">
 
-
         $(document).ready(function () {
             var decodePara = decodeURI(document.location.href);
             var para = decodePara.split("=");
             // console.log(para[1]);
-            $('#count_name').append("<span style=\"display: inline-block; font-size: xx-large; font-weight: 900; vertical-align: text-bottom\">"+ check_country[i]+"</span>");
+            var c_name1;
 
             $.getJSON('./Json/recentNews.json', function (json) {
+
                 $('#rejsonTable').append("<tbody>");
                 for (var counter = 0; counter < json.length; counter++) {
                     if (json[counter].countryEnName === para[1]) {
+                        c_name1= json[counter].countryName;
+                        // console.log("countryName", json[counter].countryName);
                         $('#rejsonTable').append("<tr><td>" + json[counter].countryName + `</td><td><a onclick="setRecentValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrtDt + "</td></tr>");
                     }
                 }
+
                 $('#rejsonTable').append("</tbody>");
+                $('#count_name').append("<span style=\"display: inline-block; font-size: xx-large; font-weight: 900; vertical-align: text-bottom\">"+ c_name1+"</span>");
+
                 $('#rejsonTable').DataTable();
+
             });
+
 
             $.getJSON('./Json/flight.json', function (json) {
                 $('#fljsonTable').append("<tbody>");
@@ -223,7 +230,7 @@
         var america = "United States";
 
         if(para[1] == "United States of America") para[1] = america;
-        console.log(para[1]);
+        // console.log(para[1]);
 
         var firebaseConfig = {
             apiKey: "AIzaSyAZXBckbfCVzWW1u7ceGyuUPCA0o5MOWgk",
@@ -252,7 +259,7 @@
                 database.ref(country_count).child('country').on('value', snap => {       //나라 이름
                     const countryName = snap.val();
                     if (countryName == para[1]) {
-                        console.log(countryName);
+                        // console.log(countryName);
                         const each_country = database.ref(country_count + '/data/');
                         each_country.on('value', snap => {
                             var data_count = Object.keys(snap.val()).length;    //개별 나라에 들어있는 데이터 수
@@ -262,13 +269,13 @@
 
                                 each_country.child(data_num + '/date').on('value', snap => {          //총 접종 퍼센트만?
                                     recent_date.push(snap.val());   //날짜 넣기
-                                    console.log(snap.val());
+                                    // console.log(snap.val());
 
                                     each_country.child(data_num + '/people_vaccinated_per_hundred').on('value', snap => {
                                         var total_percent = snap.val();
                                         total_percent *=1;
                                         recent_percent.push(total_percent);
-                                        console.log(snap.val());
+                                        // console.log(snap.val());
 
                                     })
                                 })
@@ -279,9 +286,6 @@
 
                 })
             }
-
-            console.log(recent_date);
-            console.log(recent_percent);
 
             //그래프
 
