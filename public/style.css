@@ -93,6 +93,6 @@ li a.flight_btn:hover {
 }
 
 
-/* @media (max-width: 1400px){
+@media (max-width: 1200px){
     ul {visibility: hidden;}
-} */
+}
