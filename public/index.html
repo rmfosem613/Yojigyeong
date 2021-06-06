@@ -86,7 +86,7 @@
         <span style="display: inline-block; color: #F17F42; font-size: xx-large;font-weight: 900; vertical-align: text-bottom">메인 </span>
         <span style="display: inline-block; font-size: xx-large; font-weight: 900; vertical-align: text-bottom">페이지 </span>
       </div>
-      <span>원하는 나라를 클릭하면 요약 정보가 뜹니다</span>
+      <span>※ 원하는 나라를 클릭하면 요약 정보가 뜹니다</span>
     </div>
   </div>
   <!-- 모달 -->
@@ -108,7 +108,7 @@
     </div>
 
     <!-- 데이터 맵 -->
-    <div id="container" style="position: relative; width: 1000px; height: 700px;"></div>
+    <div id="container" style="position: relative; width: 90%; height: 50%; margin-right: 10%"></div>
 
   </div>
 
@@ -122,6 +122,7 @@
         UNKNOWN: 'rgb(0,0,0)',
         defaultFill: '#8B8B8B'
       },
+      responsive: true,
       // 하이라이트
       geographyConfig: {
         highlightFillColor: '#FFEEE4',
@@ -155,6 +156,11 @@
         });
       }
     });
+
+     window.addEventListener('resize', function() {
+        map.resize();
+    });
+
     function setChildValue(index) {
       window.location.href = "recentview.html?index=" + index;
     }
