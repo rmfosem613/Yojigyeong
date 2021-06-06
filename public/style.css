@@ -92,9 +92,7 @@ li a.flight_btn:hover {
     margin-bottom: 50px;
 }
 
-/* 화면 너비 0 ~ 1090px 
-@media (max-width: 1090px){
-    #wrap {width: 100%;}
-    #content_box {width: 100%;}
-    #content_box .content1{height: 580px;}
-}*/
+
+/* @media (max-width: 1400px){
+    ul {visibility: hidden;}
+} */
