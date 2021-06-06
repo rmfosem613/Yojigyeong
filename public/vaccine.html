@@ -16,6 +16,10 @@
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
     <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<!--    <script src="./js/jquery-latest.js"></script>-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
 
     <script>
         var check_country = new Array;
@@ -105,7 +109,7 @@
                         src="https://ourworldindata.org/explorers/coronavirus-data-explorer?tab=map&zoomToSelection=true&pickerSort=desc&pickerMetric=total_vaccinations_per_hundred&Metric=Vaccine+doses&Interval=Cumulative&Relative+to+Population=true&Align+outbreaks=false&country=USA~GBR~ISR~DEU~ARE~ARG~FRA"
                         width="100%" height="92%" scrolling="no" frameborder="1"></iframe>
                         </div>
-            <div class="content2">
+            <div class="content2" align="center">
                 <div style="align-items: center; height: 50px;display: flex; align-items: center;">
                     <div id="table_name2" style="text-align: center; width: 100%">
                         <h2 style="display: inline-block">국가 별 일일 </h2>
@@ -154,6 +158,7 @@
                     firebase.initializeApp(firebaseConfig);
                     $(document).ready(function () {
                         $('#jsonTable').append("<tbody>");
+
 
                         const database = firebase.database();
 
@@ -209,15 +214,22 @@
                             })
                         })
                     })
+
                     function setDropValue() {
                         var x = document.getElementById("search-select").value;
                         window.location.href = "countryview.html?country=" + x;
                     }
-                </script>
 
+                </script>
+                <div align="center" id="loading" style="width:100%; height: 100%; text-align:center; margin-top: 30px;margin-bottom: 30px">
+                    <img src="./image/loading.gif"><br>
+                </div>
             </div>
         </div>
     </div>
+    <script language="javascript">
+        $('#loading').hide(5000);
+    </script>
 </body>
 
 </html>
