@@ -55,10 +55,18 @@ li a.vaccine_btn:hover {
 li a.flight_btn:hover {
     color: #F17F42;
 }
+#page_title {
+    margin-left:10%; 
+    text-align: center;
+    margin-top: 40px; 
+    height: 100%
+}
+
 /* container 구성 */
 #wrap {
-    min-width: 480px;
+    /* min-width: 480px; */
     margin-left: 25%;
+    width: 65%;
     background-color: #FAFAFA;
 }
 #content_box {
@@ -94,5 +102,7 @@ li a.flight_btn:hover {
 
 
 @media (max-width: 1200px){
-    ul {visibility: hidden;}
+    ul {visibility: hidden; width: 0%; height: 0%;}
+    #wrap {margin-left: 20%}
+    #page_title{margin-left: 3%;}
 }
