@@ -71,30 +71,48 @@
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
-    <!-- 사이드 메뉴 -->
-    <div class = "sidemenu" id="side_menu">
-        <ul style="top: 0;">
-            <li><a class="home_btn" href="./index.html"><img src="./image/yojigyong.png" style="margin-right: 13px; height: 50px;"></a></li>
-            <hr style="margin-top: 15px; margin-left: 20px; margin-right: 30px;">
-
-            <!-- 드랍 다운 -->
-            <div style="margin-left: 30px; margin-top: 25px;">
-                <select class="ui search selection dropdown" id="search-select" onchange="setDropValue()">
-                    <option value="">나라 이름</option>
-                </select>
-            </div>
-
-            <li><a class="vaccine_btn" href="./vaccine.html"><img src="./image/vaccinTV.png" style="margin-left: 4px; height: 27px;"></a></li>
-            <li><a class="flight_btn" href="./flight.html"><img src="./image/flightTV.png" style="height: 27px;"></a></li>
-            <li><a class="recent_btn" href="./recent.html"><img src="./image/recentTV.png" style="margin-left: 3px; height: 27px;"></a></li>
+    <header class="navbar">
+        <ul class="nav_menu">
+            <li class="nav_li"><a class="vaccine_btn" href="./vaccine.html"><img src="./image/vaccinTV.png"
+                        style="margin-left: 4px; height: 27px;"></a></li>
+            <li class="nav_li"><a class="flight_btn" href="./flight.html"><img src="./image/flightTV.png"
+                        style="height: 27px;"></a></li>
+            <li class="nav_li"><a class="recent_btn" href="./recent.html"><img src="./image/recentTV.png"
+                        style="margin-left: 3px; height: 27px;"></a></li>
         </ul>
-    </div>
+    </header>
+
+
+    <!-- 사이드 메뉴 -->
+    <ul class="side_menu" style="top: 0;">
+        <li style="margin-top: 25px; margin-left: 15px;"><a class="home_btn" href="./index.html"><img
+                    src="./image/yojigyong.png" style="margin-right: 13px; height: 50px;"></a></li>
+        <hr style="margin-top: 15px; margin-left: 20px; margin-right: 30px;">
+
+        <!-- 드랍 다운 -->
+        <div style="margin-left: 30px; margin-top: 25px;">
+            <select class="ui search selection dropdown" id="search-select" onchange="setDropValue()">
+                <option value="">나라 이름</option>
+            </select>
+        </div>
+
+        <li class="side_menu_li"><a class="vaccine_btn" href="./vaccine.html"><img src="./image/vaccinTV.png"
+                    style="margin-left: 4px; height: 27px;"></a></li>
+        <li class="side_menu_li"><a class="flight_btn" href="./flight.html"><img src="./image/flightTV.png"
+                    style="height: 27px;"></a></li>
+        <li class="side_menu_li"><a class="recent_btn" href="./recent.html"><img src="./image/recentTV.png"
+                    style="margin-left: 3px; height: 27px;"></a></li>
+    </ul>
 
     <div id="wrap">
         <div id="page_title" style="margin-right: 80px; text-align: center;margin-top: 20px; height: 100%">
             <div style="line-height: 50px;">
-                <span style="display: inline-block; color: #F17F42; font-size: xx-large;font-weight: 900; vertical-align: text-bottom">나라 별 </span>
-                <span style="display: inline-block; font-size: xx-large; font-weight: 900; vertical-align: text-bottom">현황 - </span>
+                <span
+                    style="display: inline-block; color: #F17F42; font-size: xx-large;font-weight: 900; vertical-align: text-bottom">나라
+                    별 </span>
+                <span
+                    style="display: inline-block; font-size: xx-large; font-weight: 900; vertical-align: text-bottom">현황
+                    - </span>
                 <span id="count_name"></span>
             </div>
         </div>
@@ -103,8 +121,10 @@
                 <h2 style="display: inline-block; color: #F17F42">백신 접종 </h2>
                 <h2 style="display: inline-block">현황</h2>
             </div>
-            <div id="vaccine_table" style="text-align: center; width: 100%; height: 100%;overflow: auto;min-width: 0px;">
-                <div align="center" id="loading_image" style="width:100%; height: 120%; text-align:center; margin-top: 30px; margin-bottom: 30px">
+            <div id="vaccine_table"
+                style="text-align: center; width: 100%; height: 100%;overflow: auto;min-width: 0px;">
+                <div align="center" id="loading_image"
+                    style="width:100%; height: 120%; text-align:center; margin-top: 30px; margin-bottom: 30px">
                     <img src="./image/loading.gif"><br>
                 </div>
 
@@ -184,14 +204,14 @@
                 $('#rejsonTable').append("<tbody>");
                 for (var counter = 0; counter < json.length; counter++) {
                     if (json[counter].countryEnName === para[1]) {
-                        c_name1= json[counter].countryName;
+                        c_name1 = json[counter].countryName;
                         // console.log("countryName", json[counter].countryName);
                         $('#rejsonTable').append("<tr><td>" + json[counter].countryName + `</td><td><a onclick="setRecentValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrtDt + "</td></tr>");
                     }
                 }
 
                 $('#rejsonTable').append("</tbody>");
-                $('#count_name').append("<span style=\"display: inline-block; font-size: xx-large; font-weight: 900; vertical-align: text-bottom\">"+ c_name1+"</span>");
+                $('#count_name').append("<span style=\"display: inline-block; font-size: xx-large; font-weight: 900; vertical-align: text-bottom\">" + c_name1 + "</span>");
 
                 $('#rejsonTable').DataTable();
 
@@ -211,9 +231,9 @@
 
 
         })
-            function setRecentValue(index) {
-                window.location.href = "flightview.html?index=" + index;
-            }
+        function setRecentValue(index) {
+            window.location.href = "flightview.html?index=" + index;
+        }
 
         function setFlightValue(index) {
             window.location.href = "flightview.html?index=" + index;
@@ -229,7 +249,7 @@
         var para = decodePara.split("=");
         var america = "United States";
 
-        if(para[1] == "United States of America") para[1] = america;
+        if (para[1] == "United States of America") para[1] = america;
         // console.log(para[1]);
 
         var firebaseConfig = {
@@ -273,7 +293,7 @@
 
                                     each_country.child(data_num + '/people_vaccinated_per_hundred').on('value', snap => {
                                         var total_percent = snap.val();
-                                        total_percent *=1;
+                                        total_percent *= 1;
                                         recent_percent.push(total_percent);
                                         // console.log(snap.val());
 
@@ -289,7 +309,7 @@
 
             //그래프
 
-            google.charts.load("current", {packages: ['corechart']});
+            google.charts.load("current", { packages: ['corechart'] });
             google.charts.setOnLoadCallback(drawChart);
 
             function drawChart() {
@@ -303,18 +323,20 @@
                 ]);
 
                 var view = new google.visualization.DataView(data);
-                view.setColumns([0,1,
-                    { calc: "stringify",
+                view.setColumns([0, 1,
+                    {
+                        calc: "stringify",
                         sourceColumn: 1,
                         type: "string",
-                        role: "annotation" }
+                        role: "annotation"
+                    }
                 ]);
                 var options = {
                     title: "Vaccination",
                     height: 400,
                     // width: 100%,
-                    bar: {groupWidth: "20%"},
-                    legend: {position: "none"},
+                    bar: { groupWidth: "20%" },
+                    legend: { position: "none" },
                     vAxis: {
                         title: '전체 접종율(%)',
                         baseline: 0.0,
@@ -329,7 +351,7 @@
     </script>
 
     <script language="javascript">
-        $(window).load(function() {
+        $(window).load(function () {
             $('#loading_image').hide();
         });
     </script>

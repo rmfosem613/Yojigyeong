@@ -58,13 +58,23 @@
 
 </head>
 
-<
+< <body style="background-color:#FAFAFA">
+  <header class="navbar">
+    <ul class="nav_menu">
+      <li class="nav_li"><a class="vaccine_btn" href="./vaccine.html"><img src="./image/vaccinTV.png"
+            style="margin-left: 4px; height: 27px;"></a></li>
+      <li class="nav_li"><a class="flight_btn" href="./flight.html"><img src="./image/flightTV.png"
+            style="height: 27px;"></a></li>
+      <li class="nav_li"><a class="recent_btn" href="./recent.html"><img src="./image/recentTV.png"
+            style="margin-left: 3px; height: 27px;"></a></li>
+    </ul>
+  </header>
 
-<body style="background-color:#FAFAFA">
+
   <!-- 사이드 메뉴 -->
-  <ul style="top: 0;">
-    <li><a class="home_btn" href="./index.html"><img src="./image/yojigyong.png"
-          style="margin-right: 13px; height: 50px;"></a></li>
+  <ul class="side_menu" style="top: 0;">
+    <li style="margin-top: 25px; margin-left: 15px;"><a class="home_btn" href="./index.html"><img
+          src="./image/yojigyong.png" style="margin-right: 13px; height: 50px;"></a></li>
     <hr style="margin-top: 15px; margin-left: 20px; margin-right: 30px;">
 
     <!-- 드랍 다운 -->
@@ -74,15 +84,13 @@
       </select>
     </div>
 
-    <li><a class="vaccine_btn" href="./vaccine.html"><img src="./image/vaccinTV.png"
+    <li class="side_menu_li"><a class="vaccine_btn" href="./vaccine.html"><img src="./image/vaccinTV.png"
           style="margin-left: 4px; height: 27px;"></a></li>
-    <li><a class="flight_btn" href="./flight.html"><img src="./image/flightTV.png" style="height: 27px;"></a></li>
-    <li><a class="recent_btn" href="./recent.html"><img src="./image/recentTV.png"
+    <li class="side_menu_li"><a class="flight_btn" href="./flight.html"><img src="./image/flightTV.png"
+          style="height: 27px;"></a></li>
+    <li class="side_menu_li"><a class="recent_btn" href="./recent.html"><img src="./image/recentTV.png"
           style="margin-left: 3px; height: 27px;"></a></li>
   </ul>
-
-  
-
 
   <div>
     <div id="page_title">
@@ -120,7 +128,7 @@
 
   </div>
 
-  
+
 
   <script>
     var map = new Datamap({
@@ -182,6 +190,6 @@
   </script>
   </div>
 
-</body>
+  </body>
 
 </html>
