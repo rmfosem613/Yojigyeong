@@ -80,7 +80,7 @@
 
     <!-- 드랍 다운 -->
     <div style="margin-left: 30px; margin-top: 25px;">
-      <select class="ui search selection dropdown" id="search-select" onchange="setDropValue()">
+      <select class="ui search selection dropdown" id="search-select" onchange="setSearchValue()">
         <option value="">나라 이름</option>
       </select>
     </div>
@@ -188,6 +188,7 @@
       var x = document.getElementById("search-select").value;
       window.location.href = "countryview.html?country=" + x;
     }
+
   </script>
   </div>
 
