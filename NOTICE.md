@@ -1,5 +1,3 @@
-
-<summary>Notice</summary>
 <div markdown="1">       
 
 # OSS Notice | Yojigyeong #
