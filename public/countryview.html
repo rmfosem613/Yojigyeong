@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>나라별 전체 정보 페이지</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+    <!-- Semantic -->
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+    <!--배경 색을 지정함-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="semantic/semantic.min.js"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.6.2/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.6.2/firebase-database.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="datamaps.world.min.js"></script>
+    <script src="./js/jquery-latest.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+
+    <script>
+        var check_country = new Array;
+        function checkCountry(countryName) {
+            var isTrue;
+            for (var i = 0; i < check_country.length; i++) {
+                if (countryName == check_country[i]) {
+                    isTrue = false;
+                    return Boolean(isTrue);
+                }
+            }
+            isTrue = true;
+            return Boolean(isTrue);
+        }
+
+        $(document).ready(function () {
+            $.getJSON('./Json/recentNews.json', function (json) {
+
+                for (var counter = 0; counter < json.length; counter++) {
+                    if (checkCountry(json[counter].countryName)) {
+                        $('#search-select').append(`<option value=` + `'${json[counter].countryEnName}'` + '>' + json[counter].countryName + '</option>');
+                        check_country.push(json[counter].countryName);
+                    }
+                }
+            });
+
+            $('#search-select')
+                .dropdown()
+                ;
+        });
+
+    </script>
+
+</head>
+
+<body style="background-color: #FAFAFA;">
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
+    <header class="navbar">
+        <ul class="nav_menu">
+            <li class="nav_li"><a class="vaccine_btn" href="./vaccine.html"><img src="./image/vaccinTV.png"
+                        style="margin-left: 4px; height: 27px;"></a></li>
+            <li class="nav_li"><a class="flight_btn" href="./flight.html"><img src="./image/flightTV.png"
+                        style="height: 27px;"></a></li>
+            <li class="nav_li"><a class="recent_btn" href="./recent.html"><img src="./image/recentTV.png"
+                        style="margin-left: 3px; height: 27px;"></a></li>
+        </ul>
+    </header>
+
+
+    <!-- 사이드 메뉴 -->
+    <ul class="side_menu" style="top: 0;">
+        <li style="margin-top: 25px; margin-left: 15px;"><a class="home_btn" href="./index.html"><img
+                    src="./image/yojigyong.png" style="margin-right: 13px; height: 50px;"></a></li>
+        <hr style="margin-top: 15px; margin-left: 20px; margin-right: 30px;">
+
+        <!-- 드랍 다운 -->
+        <div style="margin-left: 30px; margin-top: 25px;">
+            <select class="ui search selection dropdown" id="search-select" onchange="setDropValue()">
+                <option value="">나라 이름</option>
+            </select>
+        </div>
+
+        <li class="side_menu_li"><a class="vaccine_btn" href="./vaccine.html"><img src="./image/vaccinTV.png"
+                    style="margin-left: 4px; height: 27px;"></a></li>
+        <li class="side_menu_li"><a class="flight_btn" href="./flight.html"><img src="./image/flightTV.png"
+                    style="height: 27px;"></a></li>
+        <li class="side_menu_li"><a class="recent_btn" href="./recent.html"><img src="./image/recentTV.png"
+                    style="margin-left: 3px; height: 27px;"></a></li>
+    </ul>
+
+    <div id="wrap">
+        <div id="page_title" style="margin-right: 80px; text-align: center;margin-top: 20px; height: 100%">
+            <div style="line-height: 50px;">
+                <span
+                    style="display: inline-block; color: #F17F42; font-size: xx-large;font-weight: 900; vertical-align: text-bottom">나라
+                    별 </span>
+                <span
+                    style="display: inline-block; font-size: xx-large; font-weight: 900; vertical-align: text-bottom">현황
+                    - </span>
+                <span id="count_name"></span>
+            </div>
+        </div>
+        <div class="ui segment" id="vaccineSegment" style="margin-right: 80px;margin-top: 30px">
+            <div id="table_name1" style=" margin-bottom: 20px;margin-left: 10px">
+                <h2 style="display: inline-block; color: #F17F42">백신 접종 </h2>
+                <h2 style="display: inline-block">현황</h2>
+            </div>
+            <div id="vaccine_table"
+                style="text-align: center; width: 100%; height: 100%;overflow: auto;min-width: 0px;">
+                <div align="center" id="loading_image"
+                    style="width:100%; height: 120%; text-align:center; margin-top: 30px; margin-bottom: 30px">
+                    <img src="./image/loading.gif"><br>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="ui segment" id="recentSegment" style="margin-right: 80px;">
+            <div style="align-items: center; height: 50px;display: flex;">
+                <div id="table_name2" style=" width: 100%; margin-bottom: 20px;margin-left: 10px">
+                    <h2 style="display: inline-block; color: #F17F42">최신 </h2>
+                    <h2 style="display: inline-block">정보</h2>
+                </div>
+            </div>
+            <table class="ui celled table" id="rejsonTable">
+                <thead>
+                    <tr>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">국가이름</font>
+                            </font>
+                        </th>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">제목</font>
+                            </font>
+                        </th>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">작성일</font>
+                            </font>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="ui segment" id="flightSegment" style="margin-right: 80px;margin-bottom: 50px">
+            <div style="align-items: center; height: 50px;display: flex;">
+                <div id="table_name" style=" width: 100%; margin-bottom: 20px;margin-left: 10px">
+                    <h2 style="display: inline-block; color: #F17F42">운항 </h2>
+                    <h2 style="display: inline-block">정보</h2>
+                </div>
+            </div>
+            <table class="ui celled table" id="fljsonTable">
+                <thead>
+                    <tr>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">국가이름</font>
+                            </font>
+                        </th>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">제목</font>
+                            </font>
+                        </th>
+                        <th>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">작성일</font>
+                            </font>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var decodePara = decodeURI(document.location.href);
+            var para = decodePara.split("=");
+            // console.log(para[1]);
+            var c_name1;
+
+            $.getJSON('./Json/recentNews.json', function (json) {
+
+                $('#rejsonTable').append("<tbody>");
+                for (var counter = 0; counter < json.length; counter++) {
+                    if (json[counter].countryEnName === para[1]) {
+                        c_name1 = json[counter].countryName;
+                        // console.log("countryName", json[counter].countryName);
+                        $('#rejsonTable').append("<tr><td>" + json[counter].countryName + `</td><td><a onclick="setRecentValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrtDt + "</td></tr>");
+                    }
+                }
+
+                $('#rejsonTable').append("</tbody>");
+                $('#count_name').append("<span style=\"display: inline-block; font-size: xx-large; font-weight: 900; vertical-align: text-bottom\">" + c_name1 + "</span>");
+
+                $('#rejsonTable').DataTable();
+
+            });
+
+
+            $.getJSON('./Json/flight.json', function (json) {
+                $('#fljsonTable').append("<tbody>");
+                for (var counter = 0; counter < json.length; counter++) {
+                    if (json[counter].country_eng_nm === para[1]) {
+                        $('#fljsonTable').append("<tr><td>" + json[counter].country_nm + `</td><td><a onclick="setChildValue(` + `${json[counter].id})` + `">` + json[counter].title + "</a></td><td>" + json[counter].wrt_dt + "</td></tr>");
+                    }
+                }
+                $('#fljsonTable').append("</tbody>");
+                $('#fljsonTable').DataTable();
+            });
+
+
+        })
+        function setRecentValue(index) {
+            window.location.href = "flightview.html?index=" + index;
+        }
+
+        function setFlightValue(index) {
+            window.location.href = "flightview.html?index=" + index;
+        }
+        function setDropValue() {
+            var x = document.getElementById("search-select").value;
+            window.location.href = "countryview.html?country=" + x;
+        }
+
+    </script>
+    <script>
+        var decodePara = decodeURI(document.location.href);
+        var para = decodePara.split("=");
+        var america = "United States";
+
+        if (para[1] == "United States of America") para[1] = america;
+        // console.log(para[1]);
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyAZXBckbfCVzWW1u7ceGyuUPCA0o5MOWgk",
+            authDomain: "yojigyeong-14b71.firebaseapp.com",
+            databaseURL: "https://yojigyeong-14b71-default-rtdb.firebaseio.com",
+            projectId: "yojigyeong-14b71",
+            storageBucket: "yojigyeong-14b71.appspot.com",
+            messagingSenderId: "143152717689",
+            appId: "1:143152717689:web:0302d80da11df82e7599a8"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+
+        //백신 정보
+        const database = firebase.database();
+
+        database.ref().on('value', snap => {
+            var count = Object.keys(snap.val()).length; //전체 나라 수
+
+            var recent_date = new Array;
+            var recent_percent = new Array;
+
+            for (var i = 0; i < count; i++) {
+                var country_count = String(i);
+                database.ref(country_count).child('country').on('value', snap => {       //나라 이름
+                    const countryName = snap.val();
+                    if (countryName == para[1]) {
+                        // console.log(countryName);
+                        const each_country = database.ref(country_count + '/data/');
+                        each_country.on('value', snap => {
+                            var data_count = Object.keys(snap.val()).length;    //개별 나라에 들어있는 데이터 수
+
+                            for (var j = data_count - 1; j > data_count - 6; j--) {        //최신 데이터 5개?
+                                var data_num = String(j);
+
+                                each_country.child(data_num + '/date').on('value', snap => {          //총 접종 퍼센트만?
+                                    recent_date.push(snap.val());   //날짜 넣기
+                                    // console.log(snap.val());
+
+                                    each_country.child(data_num + '/people_vaccinated_per_hundred').on('value', snap => {
+                                        var total_percent = snap.val();
+                                        total_percent *= 1;
+                                        recent_percent.push(total_percent);
+                                        // console.log(snap.val());
+
+                                    })
+                                })
+                            }
+
+                        })
+                    }
+
+                })
+            }
+
+            //그래프
+
+            google.charts.load("current", { packages: ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ["Date", "백신 접종율(%)"],
+                    [recent_date[4], recent_percent[4]],
+                    [recent_date[3], recent_percent[3]],
+                    [recent_date[2], recent_percent[2]],
+                    [recent_date[1], recent_percent[1]],
+                    [recent_date[0], recent_percent[0]]
+                ]);
+
+                var view = new google.visualization.DataView(data);
+                view.setColumns([0, 1,
+                    {
+                        calc: "stringify",
+                        sourceColumn: 1,
+                        type: "string",
+                        role: "annotation"
+                    }
+                ]);
+                var options = {
+                    title: "Vaccination",
+                    height: 400,
+                    // width: 100%,
+                    bar: { groupWidth: "20%" },
+                    legend: { position: "none" },
+                    vAxis: {
+                        title: '전체 접종율(%)',
+                        baseline: 0.0,
+                        maxValue: 100.0
+                    },
+                };
+                var chart = new google.visualization.ColumnChart(document.getElementById("vaccine_table"));
+                chart.draw(view, options);
+            }
+        })
+
+    </script>
+
+    <script language="javascript">
+        $(window).load(function () {
+            $('#loading_image').hide();
+        });
+    </script>
+</body>
+
+</html>
